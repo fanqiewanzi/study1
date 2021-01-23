@@ -8,6 +8,10 @@
         SELECT * FROM user where id=#{0};
     </select>
 
+    <select id="getAccountByInput"  parameterType="String" resultType="com.example.learn.demo.modle.Account">
+        SELECT * FROM user where id=#{0} or phoneNumber=#{0};
+    </select>
+
     <select id="getAccountByPhoneNumber"  parameterType="String" resultType="com.example.learn.demo.modle.Account">
         SELECT * FROM user where phoneNumber=#{0};
     </select>

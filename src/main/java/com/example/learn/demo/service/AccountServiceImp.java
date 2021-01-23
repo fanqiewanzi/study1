@@ -3,6 +3,7 @@ package com.example.learn.demo.service;
 import com.example.learn.demo.dao.AccountDao;
 import com.example.learn.demo.modle.Account;
 import com.example.learn.demo.modle.Response;
+import com.example.learn.demo.utils.JwtUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
 
@@ -39,15 +40,13 @@ public class AccountServiceImp implements AccountService{
     public Response login(String id,String password) {
         Map<String, Object> map=new HashMap<>();
         try{
-        Account account=accountDao.getAccountByPhoneNumber(id);
-        if(account==null)
-        {
-            account=accountDao.getAccountById(id);
-        }
+        Account account=accountDao.getAccountByInput(id);
         /*对输入密码进行加密与数据库中存储密码进行比较*/
         if(account.getPassword().equals(DigestUtils.md5Hex(password)))
         {
-            return new Response("200","登陆成功");
+            String jwtToken = JwtUtils.createToken(account);
+            account.setToken(jwtToken);
+            return new Response("200","登陆成功",account);
         }
         else
         {
