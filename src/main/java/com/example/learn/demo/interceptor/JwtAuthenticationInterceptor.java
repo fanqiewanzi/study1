@@ -61,12 +61,10 @@ import java.lang.reflect.Method;
                 JwtUtils.verifyToken(token, userId);
 
                 //获取载荷内容
-                String userName = JwtUtils.getClaimByName(token, "userName").asString();
-                String realName = JwtUtils.getClaimByName(token, "realName").asString();
+                String phoneNumber = JwtUtils.getClaimByName(token, "phoneNumber").asString();
 
                 //放入attribute以便后面调用
-                httpServletRequest.setAttribute("userName", userName);
-                httpServletRequest.setAttribute("realName", realName);
+                httpServletRequest.setAttribute("phoneNumber", phoneNumber);
                 return true;
 
             }
