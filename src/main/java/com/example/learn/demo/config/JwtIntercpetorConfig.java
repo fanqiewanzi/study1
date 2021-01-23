@@ -10,7 +10,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class JwtIntercpetorConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-
         //默认拦截所有路径
         registry.addInterceptor(authenticationInterceptor())
                 .addPathPatterns("/**");

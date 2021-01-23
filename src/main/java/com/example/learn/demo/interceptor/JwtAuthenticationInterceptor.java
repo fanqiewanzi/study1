@@ -50,11 +50,11 @@ import java.lang.reflect.Method;
                 String userId = JwtUtils.getAudience(token);
 
                 //找找看是否有这个user   因为我们需要检查用户是否存在，读者可以自行修改逻辑
-                Account account=accountDao.getAccountById(userId);
+                Account account=accountDao.getAccountByInput(userId);
 
                 if (account == null) {
-                    //这个错误也是我自定义的
-                    throw new UserNotExist();
+                        //这个错误也是我自定义的
+                        throw new UserNotExist();
                 }
 
                 // 验证 token

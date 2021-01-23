@@ -29,4 +29,10 @@ public class AccountController {
     {
         return accountServiceImp.rigister(account);
     }
+
+    @GetMapping("/profile")
+    String search()
+    {
+        return "hello word";
+    }
 }
