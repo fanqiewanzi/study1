@@ -15,7 +15,7 @@ public class AccountServiceImp implements AccountService{
     @Resource
     AccountDao accountDao;
     @Override
-    public Response Rigister(Account account) {
+    public Response rigister(Account account) {
         Account account1=accountDao.getAccountById(account.getId());
         /*判断id是否被人注册*/
         if(account1!=null)
@@ -36,7 +36,7 @@ public class AccountServiceImp implements AccountService{
     }
 
     @Override
-    public Response Login(String id,String password) {
+    public Response login(String id,String password) {
         Map<String, Object> map=new HashMap<>();
         try{
         Account account=accountDao.getAccountByPhoneNumber(id);

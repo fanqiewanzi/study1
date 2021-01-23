@@ -18,13 +18,13 @@ public class AccountController {
     private AccountServiceImp accountServiceImp;
 
     @GetMapping("/login")
-    Response Login(@RequestParam String id, @RequestParam String password)
+    Response login(@RequestParam String id, @RequestParam String password)
     {
-        return accountServiceImp.Login(id,password);
+        return accountServiceImp.login(id,password);
     }
     @PostMapping("/register")
-    Response Rigister(@RequestBody Account account)
+    Response rigister(@RequestBody Account account)
     {
-        return accountServiceImp.Rigister(account);
+        return accountServiceImp.rigister(account);
     }
 }

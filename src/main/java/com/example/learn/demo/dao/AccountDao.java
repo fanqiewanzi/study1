@@ -8,7 +8,4 @@ public interface AccountDao {
     Account getAccountByPhoneNumber(String phoneNumber);
 
     void insert(Account account);
-
-
-
 }
