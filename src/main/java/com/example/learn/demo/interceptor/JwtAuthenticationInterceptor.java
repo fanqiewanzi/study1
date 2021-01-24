@@ -16,7 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 
+    /**
+     * @author BAZINGA
+     */
     public class JwtAuthenticationInterceptor implements HandlerInterceptor {
+
         @Resource
         AccountDao accountDao;
 
@@ -42,7 +46,7 @@ import java.lang.reflect.Method;
                 System.out.println("被jwt拦截需要验证");
                 // 执行认证
                 if (token == null) {
-                    //这里其实是登录失效,没token了   这个错误也是我自定义的，读者需要自己修改
+                    //登陆失效，无token
                     throw new NeedToLogin();
                 }
 
@@ -66,7 +70,6 @@ import java.lang.reflect.Method;
                 //放入attribute以便后面调用
                 httpServletRequest.setAttribute("phoneNumber", phoneNumber);
                 return true;
-
             }
             return true;
         }
