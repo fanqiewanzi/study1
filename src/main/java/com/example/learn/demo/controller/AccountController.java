@@ -36,6 +36,7 @@ public class AccountController {
     {
         return "hello word";
     }
+
     @PassToken
     @GetMapping(value = "/username")
     public String checkName(HttpServletRequest req) {
