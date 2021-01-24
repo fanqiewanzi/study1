@@ -36,13 +36,4 @@ public class AccountController {
     {
         return "hello word";
     }
-
-    @PassToken
-    @GetMapping(value = "/username")
-    public String checkName(HttpServletRequest req) {
-        //之前在拦截器里设置好的名字现在可以取出来直接用了
-        String name = (String) req.getAttribute("phoneNumber");
-        return name;
-    }
-
 }
