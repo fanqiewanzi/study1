@@ -29,7 +29,7 @@ public class JwtUtils {
             map.put("alg", "HS256");
             map.put("typ", "JWT");
             Calendar nowTime = Calendar.getInstance();
-            nowTime.add(Calendar.SECOND,30);
+            nowTime.add(Calendar.MINUTE,30);
             Date expiresDate = nowTime.getTime();
 
             /**
@@ -39,7 +39,8 @@ public class JwtUtils {
              * withIssuedAt()是Token中Playload中的发行时间
              * withExpiresAt()是Token中Playload中的有效时间
              * withClaim()是Token中Playload中的载荷（可以有多个）
-             * sign()是Token中的signature，存储在服务端，用于创建和解密Token*/
+             * sign()是Token中的signature，存储在服务端，用于创建和解密Token
+             * */
             return JWT.create().withHeader(map)
                     .withAudience(account.getId())
                     .withIssuedAt(new Date())
@@ -56,11 +57,11 @@ public class JwtUtils {
         public static void verifyToken(String token, String secret) throws TokenUnavailable {
             DecodedJWT jwt = null;
             try {
+                /**把密匙加密给verifier然后对传来的token进行验证**/
                 JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secret+"HelloLehr")).build();
                 jwt = verifier.verify(token);
             } catch (Exception e) {
                 //效验失败
-                //这里抛出的异常是我自定义的一个异常，你也可以写成别的
                 throw new TokenUnavailable();
             }
         }
