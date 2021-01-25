@@ -54,12 +54,13 @@ public class JwtUtils {
          * @param token
          * @throws TokenUnavailable
          */
-        public static void verifyToken(String token, String secret) throws TokenUnavailable {
+        public static boolean verifyToken(String token, String secret) throws TokenUnavailable {
             DecodedJWT jwt = null;
             try {
                 /**把密匙加密给verifier然后对传来的token进行验证**/
                 JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secret+"HelloLehr")).build();
                 jwt = verifier.verify(token);
+                return true;
             } catch (Exception e) {
                 //效验失败
                 throw new TokenUnavailable();
