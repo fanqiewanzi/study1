@@ -65,11 +65,11 @@ import java.lang.reflect.Method;
                 // 验证 token
                 JwtUtils.verifyToken(token, userId);
 
-                //获取载荷内容
-                String phoneNumber = JwtUtils.getClaimByName(token, "phoneNumber").asString();
-
-                //放入attribute以便后面调用
-                httpServletRequest.setAttribute("phoneNumber", phoneNumber);
+//                //获取载荷内容
+//                String phoneNumber = JwtUtils.getClaimByName(token, "phoneNumber").asString();
+//
+//                //放入attribute以便后面调用
+//                httpServletRequest.setAttribute("phoneNumber", phoneNumber);
                 return true;
             }
             return true;
