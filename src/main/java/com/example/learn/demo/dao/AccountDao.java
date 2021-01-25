@@ -2,9 +2,7 @@ package com.example.learn.demo.dao;
 
 import com.example.learn.demo.modle.Account;
 
-/**
- * @author BAZINGA
- */
+
 public interface AccountDao {
     Account getAccountById(String id);
 

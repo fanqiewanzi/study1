@@ -46,11 +46,11 @@ public class JwtUtils {
                     .withIssuedAt(new Date())
                     .withExpiresAt(expiresDate)
                     .withClaim("phoneNumber", account.getPhoneNumber())
-                    .sign(Algorithm.HMAC256(account.getId()+"HelloLehr"));
+                    .sign(Algorithm.HMAC256(account.getId()+"BAZINGA"));
         }
 
         /**
-         * 检验合法性，其中secret参数就应该传入的是用户的id
+         * 检验合法性，其中secret参数就应该传入的是用户的id或者phoneNumber
          * @param token
          * @throws TokenUnavailable
          */
@@ -58,7 +58,7 @@ public class JwtUtils {
             DecodedJWT jwt = null;
             try {
                 /**把密匙加密给verifier然后对传来的token进行验证**/
-                JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secret+"HelloLehr")).build();
+                JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secret+"BAZINGA")).build();
                 jwt = verifier.verify(token);
                 return true;
             } catch (Exception e) {

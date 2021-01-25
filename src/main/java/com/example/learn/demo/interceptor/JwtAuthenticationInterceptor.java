@@ -16,9 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 
-    /**
-     * @author BAZINGA
-     */
     public class JwtAuthenticationInterceptor implements HandlerInterceptor {
 
         @Resource
@@ -54,11 +51,10 @@ import java.lang.reflect.Method;
                 // 获取 token 中的 user Name
                 String userId = JwtUtils.getAudience(token);
 
-                //找找看是否有这个user   因为我们需要检查用户是否存在，读者可以自行修改逻辑
+                //找找看是否有这个user
                 Account account=accountDao.getAccountByInput(userId);
 
                 if (account == null) {
-                        //这个错误也是我自定义的
                         throw new UserNotExist();
                 }
 
