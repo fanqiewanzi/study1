@@ -8,13 +8,13 @@ import lombok.Data;
 public class Response {
     private String code;
     private String message;
-    private Object obj;
+    private Object data;
 
    public Response(String code,String message)
     {
         this.code=code;
         this.message=message;
-        this.obj=null;
+        this.data=null;
     }
 
 }

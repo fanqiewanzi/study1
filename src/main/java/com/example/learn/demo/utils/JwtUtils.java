@@ -11,27 +11,41 @@ import com.example.learn.demo.modle.Account;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JwtUtils {
 
         /**
          签发对象：这个用户的id
          签发时间：现在
-         有效时间：30分钟
+         有效时间：30秒
          载荷内容：暂时设计为：这个人的名字，这个人的昵称
          加密密钥：这个人的id加上一串字符串
          */
         public static String createToken(Account account) {
 
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("alg", "HS256");
+            map.put("typ", "JWT");
             Calendar nowTime = Calendar.getInstance();
             nowTime.add(Calendar.SECOND,30);
             Date expiresDate = nowTime.getTime();
 
-            return JWT.create().withAudience(account.getId())   //签发对象
-                    .withIssuedAt(new Date())    //发行时间
-                    .withExpiresAt(expiresDate)  //有效时间
-                    .withClaim("phoneNumber", account.getPhoneNumber())    //载荷，随便写几个都可以
-                    .sign(Algorithm.HMAC256(account.getId()+"HelloLehr"));   //加密
+            /**
+             * Token三部分：1.Header    2.Playload  3.Signature
+             * withHeader()是Token的Header
+             * withAudience()是Token中Playload中的签发对象
+             * withIssuedAt()是Token中Playload中的发行时间
+             * withExpiresAt()是Token中Playload中的有效时间
+             * withClaim()是Token中Playload中的载荷（可以有多个）
+             * sign()是Token中的signature，存储在服务端，用于创建和解密Token*/
+            return JWT.create().withHeader(map)
+                    .withAudience(account.getId())
+                    .withIssuedAt(new Date())
+                    .withExpiresAt(expiresDate)
+                    .withClaim("phoneNumber", account.getPhoneNumber())
+                    .sign(Algorithm.HMAC256(account.getId()+"HelloLehr"));
         }
 
         /**
